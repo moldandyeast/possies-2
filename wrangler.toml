@@ -1,5 +1,11 @@
+# Assets-only Worker. Requests to static assets are free and unlimited on
+# Cloudflare, and this Worker has no script, bindings, KV, R2 or Durable
+# Objects, so it cannot generate usage charges. Keep it that way: do not add
+# a `main` script or `run_worker_first`, both of which make requests billable.
 name = "demo-possie-procedural-bot"
 compatibility_date = "2026-09-01"
+workers_dev = false
+preview_urls = false
 
 routes = [
   { pattern = "demo-possie-procedural-bot.moldandyeast.com", custom_domain = true }
