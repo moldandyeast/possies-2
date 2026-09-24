@@ -1203,6 +1203,14 @@ let dl = null;
 $('bExport').disabled = true;
 (async () => {
   try { dl = window.claude && window.claude.use ? await window.claude.use('downloads') : null; } catch (e) { dl = null; }
+  // Outside the artifact viewer there is no downloads API, so fall back to a plain browser download.
+  if (!dl) dl = { save: async ({filename, data}) => {
+    const blob = data instanceof Blob ? data : new Blob([data], {type:'application/json'});
+    const url = URL.createObjectURL(blob);
+    const a = Object.assign(document.createElement('a'), {href:url, download:filename});
+    document.body.appendChild(a); a.click(); a.remove();
+    setTimeout(() => URL.revokeObjectURL(url), 60000);
+  } };
   $('bExport').disabled = !dl;
   $('xGo').disabled = !dl;
   if (!dl){ $('bExport').title = $('xGo').title = 'Saving files is not available in this view'; }
