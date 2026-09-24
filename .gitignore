@@ -1,0 +1,5 @@
+node_modules/
+.wrangler/
+.context/
+.DS_Store
+public/fonts/*.woff2

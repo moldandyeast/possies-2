@@ -1,0 +1,9 @@
+name = "demo-possie-procedural-bot"
+compatibility_date = "2026-09-01"
+
+routes = [
+  { pattern = "demo-possie-procedural-bot.moldandyeast.com", custom_domain = true }
+]
+
+[assets]
+directory = "./public"
